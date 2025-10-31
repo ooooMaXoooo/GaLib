@@ -21,6 +21,8 @@
     "cmake.preferredGenerators": [
         "Ninja"
     ],
+    // S'assure que CMake se configure au démarrage de VSCode
+    "cmake.configureOnOpen": true,
     //"C_Cpp.default.cppStandard": "c++23",
     // =========================================================================
     // SECTION 3 & 4 : ÉDITEUR ET CONFIGURATION SPÉCIFIQUE AU LANGAGE

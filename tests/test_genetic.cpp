@@ -1,6 +1,7 @@
 // Ce define est crucial !
 // Il dit à Catch2 de créer sa propre fonction main() dans ce fichier.
 // Ne le mettez que dans UN SEUL fichier .cpp de test.
+#include <cstdint>
 #define CATCH_CONFIG_MAIN
 
 #include <catch2/catch_approx.hpp>
@@ -24,8 +25,8 @@ TEST_CASE("Conversion Binaire <-> Réel", "[utils]") {
     const uint32_t MAX_INT = 65535;
 
     SECTION("Test des bornes") {
-        double min_val = genetic::utils::bin_to_real<double, uint32_t>(0, cfg.min_real, cfg.max_real, cfg.integer_bits);
-        double max_val =
+        auto min_val = genetic::utils::bin_to_real<double, uint32_t>(0, cfg.min_real, cfg.max_real, cfg.integer_bits);
+        auto max_val =
             genetic::utils::bin_to_real<double, uint32_t>(MAX_INT, cfg.min_real, cfg.max_real, cfg.integer_bits);
 
         // Utilise Catch2 pour vérifier les valeurs
@@ -35,11 +36,17 @@ TEST_CASE("Conversion Binaire <-> Réel", "[utils]") {
 
     SECTION("Test du milieu") {
         // (MAX_INT / 2)
-        double mid_val = genetic::utils::bin_to_real<double, uint32_t>(
-            32767, cfg.min_real, cfg.max_real, cfg.integer_bits);  // NOLINT (cppcoreguidelines-avoid-magic-numbers)
+        auto bin_to_real = [&cfg](uint32_t bin_value) -> double {
+            return genetic::utils::bin_to_real<double, uint32_t>(bin_value, cfg.min_real, cfg.max_real,
+                                                                 cfg.integer_bits);
+        };
 
-        // On utilise Approx() pour gérer les imprécisions du flottant
-        REQUIRE(mid_val == Catch::Approx(-0.00030518).margin(1e-9));  // NOLINT (cppcoreguidelines-avoid-magic-numbers)
+        auto mid_val = bin_to_real(cfg.get_integer_max() / 2);
+
+        // On utilise Approx() pour gérer les imprécisions de notre représentation en binaire
+        const double error_bit = 2 * (bin_to_real(1) - bin_to_real(0));
+        // NOLINTNEXTLINE (cppcoreguidelines-avoid-magic-numbers)
+        REQUIRE(mid_val == Catch::Approx((cfg.max_real + cfg.min_real) / 2).margin(error_bit));
     }
 }
 

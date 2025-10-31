@@ -116,7 +116,7 @@ struct Config {
     size_t integer_bits = std::numeric_limits<Integer>::digits;
 
     /// Valeur maximale pour les gènes entiers (calculée automatiquement si laissée à 0)
-    Integer integer_max = std::numeric_limits<Integer>::max();
+    Integer integer_max = 0;
 
     // ========== Paramètres de l'algorithme génétique ==========
 

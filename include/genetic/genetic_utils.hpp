@@ -18,22 +18,22 @@ namespace genetic::utils {
  */
 template <typename Real, typename Integer>
 inline Real bin_to_real(Integer bin_value, Real min_real, Real max_real, size_t num_bits) {
-  static_assert(std::is_floating_point_v<Real>, "Real must be floating-point");
-  static_assert(std::is_unsigned_v<Integer>, "Integer must be unsigned");
+    static_assert(std::is_floating_point_v<Real>, "Real must be floating-point");
+    static_assert(std::is_unsigned_v<Integer>, "Integer must be unsigned");
 
-  // Calculer la valeur maximale pour num_bits
-  Integer max_int_value;
-  if (num_bits == std::numeric_limits<Integer>::digits) {
-    max_int_value = std::numeric_limits<Integer>::max();
-  } else {
-    max_int_value = (Integer(1) << num_bits) - Integer(1);
-  }
+    // Calculer la valeur maximale pour num_bits
+    Integer max_int_value;
+    if (num_bits == std::numeric_limits<Integer>::digits) {
+        max_int_value = std::numeric_limits<Integer>::max();
+    } else {
+        max_int_value = (Integer(1) << num_bits) - Integer(1);
+    }
 
-  // Normaliser entre 0 et 1
-  Real normalized = static_cast<Real>(bin_value) / static_cast<Real>(max_int_value);
+    // Normaliser entre 0 et 1
+    Real normalized = static_cast<Real>(bin_value) / static_cast<Real>(max_int_value);
 
-  // Mapper sur [min_real, max_real]
-  return min_real + (normalized * (max_real - min_real));
+    // Mapper sur [min_real, max_real]
+    return min_real + (normalized * (max_real - min_real));
 }
 
 /**
@@ -49,30 +49,30 @@ inline Real bin_to_real(Integer bin_value, Real min_real, Real max_real, size_t 
  */
 template <typename Real, typename Integer>
 inline Integer real_to_bin(Real real_value, Real min_real, Real max_real, size_t num_bits) {
-  static_assert(std::is_floating_point_v<Real>, "Real must be floating-point");
-  static_assert(std::is_unsigned_v<Integer>, "Integer must be unsigned");
+    static_assert(std::is_floating_point_v<Real>, "Real must be floating-point");
+    static_assert(std::is_unsigned_v<Integer>, "Integer must be unsigned");
 
-  // Calculer la valeur maximale pour num_bits
-  Integer max_int_value;
-  if (num_bits == std::numeric_limits<Integer>::digits) {
-    max_int_value = std::numeric_limits<Integer>::max();
-  } else {
-    max_int_value = (Integer(1) << num_bits) - Integer(1);
-  }
+    // Calculer la valeur maximale pour num_bits
+    Integer max_int_value;
+    if (num_bits == std::numeric_limits<Integer>::digits) {
+        max_int_value = std::numeric_limits<Integer>::max();
+    } else {
+        max_int_value = (Integer(1) << num_bits) - Integer(1);
+    }
 
-  // Clamp la valeur dans [min_real, max_real]
-  if (real_value < min_real) {
-    real_value = min_real;
-  }
-  if (real_value > max_real) {
-    real_value = max_real;
-  }
+    // Clamp la valeur dans [min_real, max_real]
+    if (real_value < min_real) {
+        real_value = min_real;
+    }
+    if (real_value > max_real) {
+        real_value = max_real;
+    }
 
-  // Normaliser entre 0 et 1
-  Real normalized = (real_value - min_real) / (max_real - min_real);
+    // Normaliser entre 0 et 1
+    Real normalized = (real_value - min_real) / (max_real - min_real);
 
-  // Convertir en entier
-  return static_cast<Integer>(normalized * static_cast<Real>(max_int_value));
+    // Convertir en entier
+    return static_cast<Integer>(normalized * static_cast<Real>(max_int_value));
 }
 
 /**
@@ -86,26 +86,26 @@ inline Integer real_to_bin(Real real_value, Real min_real, Real max_real, size_t
  */
 template <typename Real, typename Integer>
 inline Integer proba_to_bin(Real proba, size_t num_bits) {
-  static_assert(std::is_floating_point_v<Real>, "Real must be floating-point");
-  static_assert(std::is_unsigned_v<Integer>, "Integer must be unsigned");
+    static_assert(std::is_floating_point_v<Real>, "Real must be floating-point");
+    static_assert(std::is_unsigned_v<Integer>, "Integer must be unsigned");
 
-  // Clamp entre 0 et 1
-  if (proba < Real(0)) {
-    proba = Real(0);
-  }
-  if (proba > Real(1)) {
-    proba = Real(1);
-  }
+    // Clamp entre 0 et 1
+    if (proba < Real(0)) {
+        proba = Real(0);
+    }
+    if (proba > Real(1)) {
+        proba = Real(1);
+    }
 
-  // Calculer la valeur maximale pour num_bits
-  Integer max_int_value;
-  if (num_bits == std::numeric_limits<Integer>::digits) {
-    max_int_value = std::numeric_limits<Integer>::max();
-  } else {
-    max_int_value = (Integer(1) << num_bits) - Integer(1);
-  }
+    // Calculer la valeur maximale pour num_bits
+    Integer max_int_value;
+    if (num_bits == std::numeric_limits<Integer>::digits) {
+        max_int_value = std::numeric_limits<Integer>::max();
+    } else {
+        max_int_value = (Integer(1) << num_bits) - Integer(1);
+    }
 
-  return static_cast<Integer>(proba * static_cast<Real>(max_int_value));
+    return static_cast<Integer>(proba * static_cast<Real>(max_int_value));
 }
 
 /**
@@ -119,18 +119,18 @@ inline Integer proba_to_bin(Real proba, size_t num_bits) {
  */
 template <typename Real, typename Integer>
 inline Real bin_to_proba(Integer bin_proba, size_t num_bits) {
-  static_assert(std::is_floating_point_v<Real>, "Real must be floating-point");
-  static_assert(std::is_unsigned_v<Integer>, "Integer must be unsigned");
+    static_assert(std::is_floating_point_v<Real>, "Real must be floating-point");
+    static_assert(std::is_unsigned_v<Integer>, "Integer must be unsigned");
 
-  // Calculer la valeur maximale pour num_bits
-  Integer max_int_value;
-  if (num_bits == std::numeric_limits<Integer>::digits) {
-    max_int_value = std::numeric_limits<Integer>::max();
-  } else {
-    max_int_value = (Integer(1) << num_bits) - Integer(1);
-  }
+    // Calculer la valeur maximale pour num_bits
+    Integer max_int_value;
+    if (num_bits == std::numeric_limits<Integer>::digits) {
+        max_int_value = std::numeric_limits<Integer>::max();
+    } else {
+        max_int_value = (Integer(1) << num_bits) - Integer(1);
+    }
 
-  return static_cast<Real>(bin_proba) / static_cast<Real>(max_int_value);
+    return static_cast<Real>(bin_proba) / static_cast<Real>(max_int_value);
 }
 
 }  // namespace genetic::utils

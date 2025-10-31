@@ -39,15 +39,17 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v4
 
-      - name: "Install Vcpkg (via Cache)"
-        # (CORRECTION ICI)
-        uses: github/actions/vcpkg-cache@v3
+      - name: "Run Vcpkg (Install & Cache)"
+        # (CORRECTION DÉFINITIVE) - Utilisation de l'action GITHUB officielle
+        uses: actions/run-vcpkg@v1
         with:
-          vcpkg-directory: ${{ runner.workspace }}/vcpkg
-          vcpkg-commit-id: "latest"
+          # On dit à vcpkg où s'installer (sera mis en cache)
+          vcpkgDirectory: ${{ runner.workspace }}/vcpkg
+          # On s'assure qu'il utilise le vcpkg.json à la racine
+          vcpkgJsonGlob: "**/vcpkg.json"
 
       - name: "Configure CMake (MSVC Release)"
-        run: cmake --preset windows-msvc-release -B build_win
+        run: cmake --preset windows-msvc-release -B build_win -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake
 
       - name: "Build CMake (MSVC Release)"
         run: cmake --build build_win --config Release
@@ -68,17 +70,17 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v4
 
-      - name: "Install Vcpkg (via Cache)"
-        # (CORRECTION ICI)
-        uses: github/actions/vcpkg-cache@v3
+      - name: "Run Vcpkg (Install & Cache)"
+        # (CORRECTION DÉFINITIVE) - Utilisation de l'action GITHUB officielle
+        uses: actions/run-vcpkg@v1
         with:
-          vcpkg-directory: ${{ runner.workspace }}/vcpkg
-          vcpkg-commit-id: "latest"
+          vcpkgDirectory: ${{ runner.workspace }}/vcpkg
+          vcpkgJsonGlob: "**/vcpkg.json"
 
       - name: "Configure CMake (Linux Debug)"
         run: |
           cmake --preset cross-gcc-debug -B build_linux \
-            -DCMAKE_TOOLCHAIN_FILE=${{ runner.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+            -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake
 
       - name: "Build CMake (Linux Debug)"
         run: cmake --build build_linux --config Debug
