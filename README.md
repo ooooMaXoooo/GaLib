@@ -10,31 +10,31 @@
 ## 🚀 Fonctionnalités Clés
 
 * **Header-Only** : Intégrez-la simplement en ajoutant le dossier `include/` à vos chemins.
-* [cite_start]**Moderne (C++20)** : Utilise les `concepts` C++20 (ex: `ConfigConcept` ) pour garantir la validité de la configuration à la compilation.
+* **Moderne (C++20)** : Utilise les `concepts` C++20 (ex: `ConfigConcept` ) pour garantir la validité de la configuration à la compilation.
 * **Hautement Configurable** :
-    * [cite_start]Types personnalisables pour les gènes (ex: `double`, `float` pour les réels ; `uint32_t`, `uint64_t` pour les entiers).
-    * [cite_start]Dimensions statiques maximales (`MaxVectors`, `MaxDimension`) pour optimiser l'utilisation de la stack (via `std::array`)[cite: 2, 3].
-    * [cite_start]Dimensions dynamiques (taille de la population, nombre de gènes) définies à l'exécution.
+    * Types personnalisables pour les gènes (ex: `double`, `float` pour les réels ; `uint32_t`, `uint64_t` pour les entiers).
+    * Dimensions statiques maximales (`MaxVectors`, `MaxDimension`) pour optimiser l'utilisation de la stack (via `std::array`).
+    * Dimensions dynamiques (taille de la population, nombre de gènes) définies à l'exécution.
 * **Mécanismes Génétiques Avancés** :
-    * [cite_start]**Auto-adaptation** : Activez (`enable_auto_adaptation` ) pour que les taux de mutation évoluent eux-mêmes.
-    * [cite_start]**Élitisme** : Préservez le meilleur individu à chaque génération (`enable_elitism` ).
-    * [cite_start]**Crossover** : Plusieurs méthodes de croisement au niveau du bit (`SINGLE_POINT_BIT_LEVEL`, `UNIFORM_BIT_LEVEL`).
-    * [cite_start]**Sélection** : Sélection par tournoi (`TOURNAMENT`).
+    * **Auto-adaptation** : Activez (`enable_auto_adaptation` ) pour que les taux de mutation évoluent eux-mêmes.
+    * **Élitisme** : Préservez le meilleur individu à chaque génération (`enable_elitism` ).
+    * **Crossover** : Plusieurs méthodes de croisement au niveau du bit (`SINGLE_POINT_BIT_LEVEL`, `UNIFORM_BIT_LEVEL`).
+    * **Sélection** : Sélection par tournoi (`TOURNAMENT`).
 
 ## 🛠️ Prérequis
 
 * Un compilateur C++20 (GCC, Clang, MSVC).
-* [cite_start]CMake (version 3.21+ ).
+* CMake (version 3.21+ ).
 * [Vcpkg](https://github.com/microsoft/vcpkg) (recommandé pour gérer les dépendances).
 
-[cite_start]La seule dépendance est `boost-type-index` [cite: 1] [cite_start](utilisée pour l'affichage des types dans le débogage ).
+La seule dépendance est `boost-type-index` (utilisée pour l'affichage des types dans le débogage ).
 
 ## ⚙️ Compilation
 
 Ce projet est conçu pour être utilisé avec `vcpkg.json` (mode manifeste) et `CMakePresets.json`.
 
 1.  Clonez le dépôt.
-2.  Assurez-vous que Vcpkg est [configuré pour s'intégrer à CMake](https://vcpkg.io/en/docs/users/integration.html) (via le `toolchainfile`). [cite_start]Les presets de ce projet le localisent à `C:/Dev/vcpkg/scripts/buildsystems/vcpkg.cmake`[cite: 7].
+2.  Assurez-vous que Vcpkg est [configuré pour s'intégrer à CMake](https://vcpkg.io/en/docs/users/integration.html) (via le `toolchainfile`). Les presets de ce projet le localisent à `C:/Dev/vcpkg/scripts/buildsystems/vcpkg.cmake`.
 3.  Listez les presets disponibles :
     ```bash
     cmake --list-presets
@@ -58,7 +58,7 @@ Voici comment trouver le vecteur 2D `(x, y)` dans l'intervalle `[-10, 10]` qui m
 #include "genetic/genetic.hpp"
 
 int main() {
-    [cite_start]// 1. Configurer l'algorithme 
+    // 1. Configurer l'algorithme 
     // <double (réels), uint32_t (entiers), 1 vecteur, 2 gènes par vecteur>
     using ConfigType = genetic::Config<double, uint32_t, 1, 2>;
     ConfigType config;
@@ -107,7 +107,7 @@ int main() {
 
 ## 📖 Exemple Avancé
 
-[cite_start]Pour un exemple plus complexe de minimisation (maximisation de l'opposé) de la [fonction de Rosenbrock](https://fr.wikipedia.org/wiki/Fonction_de_Rosenbrock), consultez `examples/example_Rosenbrock.cpp`. Ce fichier teste également de multiples combinaisons de paramètres (élitisme, auto-adaptation, méthodes de crossover).
+Pour un exemple plus complexe de minimisation (maximisation de l'opposé) de la [fonction de Rosenbrock](https://fr.wikipedia.org/wiki/Fonction_de_Rosenbrock), consultez `examples/example_Rosenbrock.cpp`. Ce fichier teste également de multiples combinaisons de paramètres (élitisme, auto-adaptation, méthodes de crossover).
 
 ## 📚 Documentation
 
