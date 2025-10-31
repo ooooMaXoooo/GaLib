@@ -2,7 +2,7 @@
 
 [![Langage: C++20](https://img.shields.io/badge/Langage-C++20-blue.svg)](https://isocpp.org/)
 [![Licence](https://img.shields.io/github/license/ooooMaXoooo/GaLib)](LICENSE)
-[![Build Status](https://github.com/[VOTRE_NOM]/[VOTRE_REPO]/actions/workflows/ci.yml/badge.svg)](https://github.com/ooooMaXoooo/GaLib/actions/workflows/ci.yml)
+[![Build Status](https://github.com/ooooMaXoooo/GaLib/actions/workflows/ci.yml/badge.svg)](https://github.com/ooooMaXoooo/GaLib/actions/workflows/ci.yml)
 [![GitHub Pages](https://img.shields.io/github/deployments/ooooMaXoooo/GaLib/github-pages?label=docs)](https://ooooMaXoooo.github.io/GaLib/)
 
 **GaLib** est une bibliothèque C++20 *header-only*, moderne et flexible, conçue pour implémenter des algorithmes génétiques. Elle est typée statiquement, hautement configurable et pensée pour la performance et la facilité d'intégration.

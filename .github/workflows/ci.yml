@@ -101,6 +101,11 @@ jobs:
       - name: "Install Doxygen"
         run: sudo apt-get update && sudo apt-get install -y doxygen
 
+      - name: "Run Vcpkg (Install & Cache)"
+        uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgJsonGlob: "**/vcpkg.json"
+
       - name: "Configure CMake"
         run: cmake -B build_doc -S .
 
