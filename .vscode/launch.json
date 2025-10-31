@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Déboguer (Windows)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            // Chemin d'exécution déterminé par le preset de build actif
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            // La tâche intégrée qui compile la cible avant de lancer le débogueur
+            "preLaunchTask": "CMake: build"
+        },
+        {
+            "name": "Déboguer (Linux/macOS)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Activer l'impression \"pretty-printing\" pour gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "CMake: build"
+        }
+    ]
+}

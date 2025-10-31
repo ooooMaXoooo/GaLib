@@ -1,0 +1,16 @@
+---
+Checks: >
+  -*,
+  bugprone-*,
+  cppcoreguidelines-*,
+  modernize-*,
+  performance-*,
+  readability-*,
+  -cppcoreguidelines-pro-type-union-access,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -modernize-use-trailing-return-type,
+  -readability-identifier-length
+
+WarningsAsErrors: ""
+HeaderFilterRegex: ".*"
+FormatStyle: "file"

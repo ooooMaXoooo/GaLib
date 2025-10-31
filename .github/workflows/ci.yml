@@ -1,0 +1,123 @@
+name: GaLib CI
+
+# Déclencheurs (triggers)
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Permissions nécessaires pour GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # === 1. Vérification du formatage ===
+  check-format:
+    name: "Check C++ Formatting"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+      - name: "Install clang-format"
+        run: sudo apt-get update && sudo apt-get install -y clang-format-15
+      - name: "Run clang-format check"
+        run: |
+          find include/ examples/ tests/ -name "*.hpp" -o -name "*.cpp" | \
+          xargs clang-format-15 --dry-run --Werror
+
+  # === 2. Build & Test sur Windows (MSVC) ===
+  build-windows:
+    name: "Build & Test (Windows MSVC)"
+    runs-on: windows-latest
+    needs: check-format
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+
+      - name: "Install Vcpkg (via Cache)"
+        # (CORRECTION ICI)
+        uses: github/actions/vcpkg-cache@v3
+        with:
+          vcpkg-directory: ${{ runner.workspace }}/vcpkg
+          vcpkg-commit-id: "latest"
+
+      - name: "Configure CMake (MSVC Release)"
+        run: cmake --preset windows-msvc-release -B build_win
+
+      - name: "Build CMake (MSVC Release)"
+        run: cmake --build build_win --config Release
+
+      - name: "Run CTest"
+        working-directory: ./build_win
+        run: ctest -C Release --output-on-failure
+
+  # === 3. Build & Test sur Linux (GCC) ===
+  build-linux:
+    name: "Build & Test (Linux GCC)"
+    runs-on: ubuntu-latest
+    needs: check-format
+
+    steps:
+      - name: "Install dependencies (GCC, CMake, Ninja, Doxygen)"
+        run: sudo apt-get update && sudo apt-get install -y g++ cmake ninja-build doxygen
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+
+      - name: "Install Vcpkg (via Cache)"
+        # (CORRECTION ICI)
+        uses: github/actions/vcpkg-cache@v3
+        with:
+          vcpkg-directory: ${{ runner.workspace }}/vcpkg
+          vcpkg-commit-id: "latest"
+
+      - name: "Configure CMake (Linux Debug)"
+        run: |
+          cmake --preset cross-gcc-debug -B build_linux \
+            -DCMAKE_TOOLCHAIN_FILE=${{ runner.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+      - name: "Build CMake (Linux Debug)"
+        run: cmake --build build_linux --config Debug
+
+      - name: "Run CTest"
+        working-directory: ./build_linux
+        run: ctest -C Debug --output-on-failure
+
+  # === 4. Construire la Documentation ===
+  build-documentation:
+    name: "Build Doxygen Docs"
+    needs: [build-windows, build-linux]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+      - name: "Install Doxygen"
+        run: sudo apt-get update && sudo apt-get install -y doxygen
+
+      - name: "Configure CMake"
+        run: cmake -B build_doc -S .
+
+      - name: "Build 'doc' target"
+        run: cmake --build build_doc --target doc
+
+      - name: "Upload Pages Artifact"
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build_doc/doxygen_docs/html
+
+  # === 5. Déployer les Pages ===
+  deploy-pages:
+    name: "Deploy to GitHub Pages"
+    needs: build-documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Deploy to GitHub Pages"
+        id: deployment
+        uses: actions/deploy-pages@v4

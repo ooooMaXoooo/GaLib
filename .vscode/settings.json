@@ -1,0 +1,76 @@
+{
+    // =========================================================================
+    // SECTION 1 : CONFIGURATION C/C++ DE BASE
+    // =========================================================================
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "C_Cpp.formatting": "disabled",
+    "C_Cpp.debugShortcut": false,
+    // =========================================================================
+    // SECTION 2 : CONFIGURATION CLANGD
+    // =========================================================================
+    "cmake.copyCompileCommands": "${workspaceFolder}/build/compile_commands.json",
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}/build",
+        "-j=12",
+        "--background-index",
+        "--completion-style=detailed",
+        "--all-scopes-completion",
+        "--header-insertion=iwyu",
+        "--clang-tidy"
+    ],
+    "cmake.preferredGenerators": [
+        "Ninja"
+    ],
+    //"C_Cpp.default.cppStandard": "c++23",
+    // =========================================================================
+    // SECTION 3 & 4 : ÉDITEUR ET CONFIGURATION SPÉCIFIQUE AU LANGAGE
+    // (Les anciens blocs [cpp] ont été fusionnés ici)
+    // =========================================================================
+    "[cpp]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+        "editor.wordBasedSuggestions": "matchingDocuments"
+    },
+    "[c]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+        "editor.wordBasedSuggestions": "matchingDocuments"
+    },
+    "editor.formatOnSave": true,
+    "editor.semanticHighlighting.enabled": true,
+    "editor.inlayHints.enabled": "on",
+    // =========================================================================
+    // SECTION 5 : GESTION DE L'ESPACE DE TRAVAIL
+    // =========================================================================
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        //"build/": true,
+        ".cache/": true
+    },
+    "search.exclude": {
+        "build/": true,
+        "**/compile_commands.json": true
+    },
+    // =========================================================================
+    // SECTION 6 : ASSOCIATION DE FICHIERS
+    // =========================================================================
+    "files.associations": {
+        // *** CORRECTION POUR LA COULEUR AJOUTÉE ICI ***
+        ".clang-tidy": "yaml",
+        ".clang-format": "yaml",
+        ".clangd": "yaml",
+        // --- Le reste de vos associations ---
+        "array": "cpp",
+        "algorithm": "cpp",
+        "atomic": "cpp",
+        // ... (le reste de votre longue liste) ...
+        "string": "cpp"
+    },
+    // =========================================================================
+    // SECTION 7 : Paramètres de CMake
+    // =========================================================================
+    "cmake.useCMakePresets": "always"
+}

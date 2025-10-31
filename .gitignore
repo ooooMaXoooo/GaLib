@@ -1,0 +1,46 @@
+# Fichiers de build CMake
+/build/
+/build-*/
+/out/
+/install/
+
+# Cache Vcpkg (si local)
+/vcpkg_installed/
+
+# Caches d'IDE et spécifiques au C++
+/.cache/
+/compile_commands.json
+*.VC.db
+*.sln.DotSettings.user
+
+# Binaires
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+*.out
+*.o
+*.obj
+
+# Fichiers locaux VSCode (permet de garder launch.json et settings.json)
+.vscode/*.db
+.vscode/ipch/
+.vscode/.browse.vc.db
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Fichiers de log
+*.log
+
+# Cache de l'IDE Visual Studio (gros fichiers)
+/.vs/
+
+
+# fichier personnels pour prompts :
+prompt.txt
+asciiLogo.txt
+arborescence.txt

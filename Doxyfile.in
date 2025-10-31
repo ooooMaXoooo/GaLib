@@ -1,0 +1,24 @@
+# Doxyfile.in - Modèle de configuration Doxygen pour CMake
+
+# --- Infos Générales ---
+PROJECT_NAME           = "@PROJECT_NAME@"
+PROJECT_NUMBER         = "@PROJECT_VERSION@"
+PROJECT_BRIEF          = "Bibliotheque d'Algorithmes Genetiques C++20"
+STRIP_FROM_PATH        = @CMAKE_CURRENT_SOURCE_DIR
+OUTPUT_DIRECTORY       = "@CMAKE_CURRENT_BINARY_DIR@/doxygen_docs"
+
+# --- Sources ---
+INPUT                  = "@CMAKE_CURRENT_SOURCE_DIR@/include" \
+                         "@CMAKE_CURRENT_SOURCE_DIR@/examples"
+RECURSIVE              = YES
+EXAMPLE_PATH           = "@CMAKE_CURRENT_SOURCE_DIR@/examples"
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+
+# --- Format de Sortie (HTML) ---
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+GENERATE_LATEX         = NO
+GENERATE_XML           = NO

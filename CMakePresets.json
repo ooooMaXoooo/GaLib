@@ -1,0 +1,179 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "vcpkg-base",
+            "hidden": true,
+            "description": "Paramètres de base pour Vcpkg et CMake",
+            "toolchainFile": "C:/Dev/vcpkg/scripts/buildsystems/vcpkg.cmake",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": true
+            }
+        },
+        {
+            "name": "windows-msvc-debug",
+            "displayName": "MSVC (Debug) - ASan ON",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/msvc-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "windows-msvc-release",
+            "displayName": "MSVC (Release)",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/msvc-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "windows-clang-cl-debug",
+            "displayName": "Clang-CL (Ninja Debug) - ASan ON",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/clang-cl-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe",
+                "CMAKE_CXX_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe"
+            }
+        },
+        {
+            "name": "windows-clang-cl-debug-VS",
+            "displayName": "Clang-CL (Visual Studio Debug) - ASan ON",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/clang-cl-debug-vs",
+            "generator": "Visual Studio 17 2022",
+            "architecture": "x64",
+            "toolset": "ClangCl",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "windows-clang-cl-release",
+            "displayName": "Clang-CL (Release)",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/clang-cl-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe",
+                "CMAKE_CXX_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe"
+            }
+        },
+        {
+            "name": "windows-gcc-ucrt-debug",
+            "displayName": "GCC UCRT64 (Debug)",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/gcc-ucrt-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "C:/msys64/ucrt64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe"
+            }
+        },
+        {
+            "name": "windows-gcc-ucrt-release",
+            "displayName": "GCC UCRT64 (Release)",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/gcc-ucrt-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_COMPILER": "C:/msys64/ucrt64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe"
+            }
+        },
+        {
+            "name": "windows-clang-ucrt-debug",
+            "displayName": "Clang UCRT64 (Debug)",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/clang-ucrt-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "C:/msys64/ucrt64/bin/clang.exe",
+                "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/clang++.exe"
+            }
+        },
+        {
+            "name": "windows-clang-ucrt-release",
+            "displayName": "Clang UCRT64 (Release)",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/clang-ucrt-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_COMPILER": "C:/msys64/ucrt64/bin/clang.exe",
+                "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/clang++.exe"
+            }
+        },
+        {
+            "name": "cross-gcc-debug",
+            "displayName": "GCC/Linux/macOS (Debug) - ASan ON",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/cross-gcc-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "cross-clang-debug",
+            "displayName": "Clang/Linux/macOS (Debug) - ASan ON",
+            "inherits": "vcpkg-base",
+            "binaryDir": "${sourceDir}/build/cross-clang-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "msvc-debug",
+            "configurePreset": "windows-msvc-debug"
+        },
+        {
+            "name": "msvc-release",
+            "configurePreset": "windows-msvc-release"
+        },
+        {
+            "name": "clang-cl-debug",
+            "configurePreset": "windows-clang-cl-debug"
+        },
+        {
+            "name": "clang-cl-debug-vs",
+            "configurePreset": "windows-clang-cl-debug-VS"
+        },
+        {
+            "name": "clang-cl-release",
+            "configurePreset": "windows-clang-cl-release"
+        },
+        {
+            "name": "gcc-ucrt-debug",
+            "configurePreset": "windows-gcc-ucrt-debug"
+        },
+        {
+            "name": "gcc-ucrt-release",
+            "configurePreset": "windows-gcc-ucrt-release"
+        },
+        {
+            "name": "clang-ucrt-debug",
+            "configurePreset": "windows-clang-ucrt-debug"
+        },
+        {
+            "name": "clang-ucrt-release",
+            "configurePreset": "windows-clang-ucrt-release"
+        },
+        {
+            "name": "cross-gcc-debug",
+            "configurePreset": "cross-gcc-debug"
+        },
+        {
+            "name": "cross-clang-debug",
+            "configurePreset": "cross-clang-debug"
+        }
+    ]
+}
