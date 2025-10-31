@@ -21,5 +21,6 @@ EXTRACT_STATIC         = YES
 GENERATE_HTML          = YES
 HTML_OUTPUT            = html
 HTML_FILE_EXTENSION    = .html
+DISABLE_INDEX_PAGE     = YES
 GENERATE_LATEX         = NO
 GENERATE_XML           = NO

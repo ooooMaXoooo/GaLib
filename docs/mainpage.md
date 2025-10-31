@@ -1,10 +1,12 @@
+\mainpage Documentation de GaLib
+
 Bienvenue sur la documentation de **GaLib** (Genetic Algorithm Library).
 
 **GaLib** est une bibliothèque C++20 *header-only*, moderne et flexible, conçue pour implémenter des algorithmes génétiques.
 
 ## Démarrage Rapide
 
-Pour un aperçu rapide de l'utilisation de la bibliothèque, consultez la [section Démarrage Rapide du README.md](https://github.com/ooooMaXoooo/GaLib#démarrage-rapide-quick-start).
+Pour un aperçu rapide de l'utilisation de la bibliothèque, consultez la [section Démarrage Rapide du README.md](https://github.com/ooooMaXoooo/GaLib?tab=readme-ov-file#-d%C3%A9marrage-rapide-quick-start).
 
 ## Navigation
 
