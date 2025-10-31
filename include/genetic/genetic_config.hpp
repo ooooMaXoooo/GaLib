@@ -86,7 +86,6 @@ concept ConfigConcept = requires {
  * @tparam Integer Unsigned integer type for integer-valued genes (uint8_t, uint16_t, uint32_t, uint64_t)
  * @tparam MaxVectors Maximum number of vectors per individual
  * @tparam MaxDimension Maximum dimension per vector
- * @tparam PopulationSize the number of individuals in the simulation (must be even)
  */
 template <typename Real, typename Integer, size_t MaxVectors = 2, size_t MaxDimension = 3>
 struct Config {
