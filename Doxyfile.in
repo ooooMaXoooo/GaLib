@@ -9,7 +9,8 @@ OUTPUT_DIRECTORY       = "@CMAKE_CURRENT_BINARY_DIR@/doxygen_docs"
 
 # --- Sources ---
 INPUT                  = "@CMAKE_CURRENT_SOURCE_DIR@/include" \
-                         "@CMAKE_CURRENT_SOURCE_DIR@/examples"
+                         "@CMAKE_CURRENT_SOURCE_DIR@/examples" \
+                         "@CMAKE_CURRENT_SOURCE_DIR@/docs"
 RECURSIVE              = YES
 EXAMPLE_PATH           = "@CMAKE_CURRENT_SOURCE_DIR@/examples"
 EXTRACT_ALL            = YES
