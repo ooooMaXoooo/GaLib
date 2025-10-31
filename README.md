@@ -111,7 +111,7 @@ Pour un exemple plus complexe de minimisation (maximisation de l'opposé) de la 
 
 ## 📚 Documentation
 
-La documentation complète de l'API (générée via Doxygen) est disponible [ici](#).
+La documentation complète de l'API (générée via Doxygen) est disponible [ici](https://ooooMaXoooo.github.io/GaLib/).
 
 ## 📜 Licence
 
