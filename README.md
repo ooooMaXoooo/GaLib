@@ -34,7 +34,7 @@ La seule dépendance est `boost-type-index` (utilisée pour l'affichage des type
 Ce projet est conçu pour être utilisé avec `vcpkg.json` (mode manifeste) et `CMakePresets.json`.
 
 1.  Clonez le dépôt.
-2.  Assurez-vous que Vcpkg est [configuré pour s'intégrer à CMake](https://vcpkg.io/en/docs/users/integration.html) (via le `toolchainfile`). Les presets de ce projet le localisent à `C:/Dev/vcpkg/scripts/buildsystems/vcpkg.cmake`.
+2.  Assurez-vous que Vcpkg est configuré pour s'intégrer à CMake (via le `toolchainfile`). Les presets de ce projet le localisent à `C:/Dev/vcpkg/scripts/buildsystems/vcpkg.cmake`.
 3.  Listez les presets disponibles :
     ```bash
     cmake --list-presets
